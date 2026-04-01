@@ -9,7 +9,6 @@ const detallePelicula = async () => {
     if (doc && doc.exists()) {
         const peli = doc.data();
         
-        // Ajustamos los campos para que coincidan con las Mayúsculas de tu Firestore
         contenedor.innerHTML = `
             <br/><h1>Película</h1><br/>
             <div class="contenido-pelicula">
