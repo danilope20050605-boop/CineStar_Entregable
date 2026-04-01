@@ -5,8 +5,6 @@ const contenedor = document.getElementById('contenido-interno');
 const mostrarPeliculas = async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const tipo = urlParams.get('id'); 
-    
-    // Cambiamos el número por texto entre comillas para que coincida con tu Firebase
     const estadoABuscar = (tipo === 'estrenos') ? "2" : "1"; 
 
     const querySnapshot = await getPeliculas(estadoABuscar);
@@ -17,7 +15,6 @@ const mostrarPeliculas = async () => {
         querySnapshot.forEach((doc) => {
             const peli = doc.data();
             
-            // Usamos peli.Titulo, peli.Sinopsis y peli.Link con la primera letra en mayúscula
             html += `
                 <div class="contenido-pelicula">
                     <div class="datos-pelicula">
@@ -36,7 +33,6 @@ const mostrarPeliculas = async () => {
                 </div>`;
         });
     } else {
-        // Si sale este mensaje, revisa que tus documentos tengan el campo 'idEstado' como número
         html += `<p>No hay películas para mostrar.</p>`;
     }
     contenedor.innerHTML = html;
