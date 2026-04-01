@@ -3,18 +3,13 @@ import { getPeliculas } from '../firebase/peliculaGet.js';
 const contenedor = document.getElementById('contenido-cartelera');
 
 const cargarCartelera = async () => {
-    // Obtenemos las películas con idEstado = 1 (Cartelera)
     const peliculasSnapshot = await getPeliculas(1); 
     
     let html = '';
 
-    // Verificamos que el snapshot exista y no esté vacío antes de recorrerlo
     if (peliculasSnapshot && !peliculasSnapshot.empty) {
         peliculasSnapshot.forEach((doc) => {
             const pelicula = doc.data();
-
-            // Usamos doc.id para la imagen si tus archivos se llaman como el ID (ej: 20.jpg)
-            // O mantenemos tu lógica de reemplazar espacios si se llaman como el título
             const nombreImagen = pelicula.Titulo ? pelicula.Titulo.replace(/ /g, "_") : "default";
 
             html += `
