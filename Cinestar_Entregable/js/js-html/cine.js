@@ -45,14 +45,12 @@ const cargarDetalleCine = async () => {
             </div>
         `;
 
-        // 2. Cargar Tarifas - Cambio de lugar y alineación de textos
         const tSnap = await getDocs(query(collection(db, "cinetarifas"), where("idCine", "==", idCine)));
         let hT = `<div class="celda-cabecera" style="width:60%; display:inline-block;">Días</div><div class="celda-cabecera" style="width:38%; display:inline-block; text-align:center;">Precio</div>`;
         
         tSnap.forEach((d, i) => {
             const t = d.data();
             const clase = (i % 2 !== 0) ? "impar" : "";
-            // Eliminamos floats y usamos flex para mantener el texto en su lugar
             hT += `<div class="${clase}" style="display:flex; width:100%; clear:both; border-bottom: 1px solid #fff;">
                 <div class="celda-titulo" style="width:60%; float:none; margin:0; padding:5px;">${t.DiasSemana}</div>
                 <div class="celda" style="width:40%; float:none; margin:0; padding:5px; text-align:center;">S/. ${t.Precio}</div>
@@ -60,7 +58,6 @@ const cargarDetalleCine = async () => {
         });
         document.getElementById('contenedor-tarifas').innerHTML = hT;
 
-        // 3. Cargar Películas - Cambio de lugar y alineación de textos
         const cpSnap = await getDocs(query(collection(db, "cinepeliculas"), where("idCine", "==", idCine)));
         let hP = `
             <div class="celda-cabecera" style="width: 40%; display: inline-block;">Películas</div>
@@ -73,7 +70,6 @@ const cargarDetalleCine = async () => {
             const nombrePeli = peliSnap.exists() ? peliSnap.data().Titulo : "Película";
             const clase = (i % 2 !== 0) ? "impar" : "";
 
-            // Cambiamos la estructura para que el nombre y horario no se mezclen
             return `
                 <div class="${clase}" style="display:flex; width:100%; clear:both; border-bottom: 1px solid #fff; align-items:center;">
                     <div class="celda-titulo" style="width: 40%; float:none; margin:0; padding:8px;">${nombrePeli}</div>
