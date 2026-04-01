@@ -11,7 +11,6 @@ const mostrarCines = async () => {
             const cine = doc.data();
             const nombreFoto = `${doc.id}.1.jpg`; 
 
-            // VALIDACIÓN DE DATOS (Para evitar el undefined)
             const razonSocial = cine.razonSocial || cine.RazonSocial || "Cine Star";
             const direccion = cine.direccion || cine.Direccion || "Dirección no disponible";
             const distrito = cine.distrito || cine.Distrito || "";
